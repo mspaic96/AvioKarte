@@ -1,0 +1,39 @@
+﻿@page
+@model Proba1.Pages.Rezervacije.AdministratorRezervacijeModel
+@{
+    ViewData["Title"] = "Administrator rezervacije";
+}
+
+<p>
+    <h3>Agenti i odobrene rezervacije</h3>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Agenti[0].UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Agenti[0].AgentOdobreneRezervacije.Count)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Agenti) 
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgentOdobreneRezervacije.Count)
+            </td>
+            
+            
+       </tr>
+        }
+    </tbody>
+
+</table>

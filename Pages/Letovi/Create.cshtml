@@ -1,0 +1,56 @@
+@page
+@model Proba1.Pages.Letovi.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    
+}
+
+<h1>Create</h1>
+
+<h4>Let</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Let.MestoPolaska" class="control-label"></label>
+                <input asp-for="Let.MestoPolaska" class="form-control" />
+                <span asp-validation-for="Let.MestoPolaska" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Let.MestoDolaska" class="control-label"></label>
+                <input asp-for="Let.MestoDolaska" class="form-control" />
+                <span asp-validation-for="Let.MestoDolaska" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Let.DatumLeta" class="control-label"></label>
+                <input asp-for="Let.DatumLeta" class="form-control" />
+                <span asp-validation-for="Let.DatumLeta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Let.BrojPresedanja" class="control-label"></label>
+                <input asp-for="Let.BrojPresedanja" class="form-control" />
+                <span asp-validation-for="Let.BrojPresedanja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Let.BrojMestaNaLetu" class="control-label"></label>
+                <input asp-for="Let.BrojMestaNaLetu" class="form-control" />
+                <span asp-validation-for="Let.BrojMestaNaLetu" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

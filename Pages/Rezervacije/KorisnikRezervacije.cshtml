@@ -1,0 +1,65 @@
+﻿@page
+@model Proba1.Pages.Rezervacije.KorisnikRezervacijeModel
+@using Proba1.Models
+
+@{
+     ViewData["Title"] = "Korisnik rezervacije";
+}
+
+<p>
+    <h3>Moje rezervacije</h3>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacije[0].Let.MestoPolaska)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacije[0].Let.MestoDolaska)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model =>model.Rezervacije[0].Let.DatumLeta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model =>model.Rezervacije[0].Let.StatusLeta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacije[0].BrojRezervisanihMesta)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Rezervacije[0].Status)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Rezervacije) 
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Let.MestoPolaska)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Let.MestoDolaska)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Let.DatumLeta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Let.StatusLeta)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.BrojRezervisanihMesta)
+            </td>
+             <td id="@(item.Id)">
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            
+       </tr>
+        }
+    </tbody>
+
+</table>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/communicationKorisnik2.js"></script>

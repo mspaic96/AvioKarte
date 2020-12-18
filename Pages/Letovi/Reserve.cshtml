@@ -1,0 +1,79 @@
+﻿@page
+@model Proba1.Pages.Letovi.ReserveModel
+@inject SignInManager<AppUser> SignInManager
+@using Proba1.Models
+
+
+
+@{
+    ViewData["Title"] = "Reserve";
+}
+
+<h1>Rezervacija</h1>
+
+<div>
+    <h4>Let</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Let.MestoPolaska)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Let.MestoPolaska)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Let.MestoDolaska)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Let.MestoDolaska)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Let.DatumLeta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Let.DatumLeta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Let.BrojPresedanja)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Let.BrojPresedanja)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Let.BrojMestaNaLetu)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Let.BrojMestaNaLetu)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Let.BrojSlobodnihMesta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Let.BrojSlobodnihMesta)
+        </dd>
+         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Let.StatusLeta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Let.StatusLeta)
+        </dd>
+    </dl>
+</div>
+<div>
+ <form method="post">
+     
+                <div class="form-group">
+                   <label asp-for="BrojRezervisanihMesta" class="control-label"></label>
+                   <input asp-for="BrojRezervisanihMesta" class="form-control" style="width: 100px;"/>
+                   <span asp-validation-for="BrojRezervisanihMesta" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <input type="submit" value="Rezerviši"  id="reserveButton" class="btn btn-primary" />
+                </div>
+</form>
+</div>
+@if(SignInManager.IsSignedIn(User) )    
+{
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/communicationKorisnik.js"></script>
+}

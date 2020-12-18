@@ -1,0 +1,82 @@
+﻿@page
+@model Proba1.Pages.Rezervacije.AgentRezervacijeModel
+@using Proba1.Models;
+@inject SignInManager<AppUser> SignInManager
+@{
+     ViewData["Title"] = "Agent rezervacije";
+}
+<p>
+    <h3>Rezervacije</h3>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacije[0].Let.MestoPolaska)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacije[0].Let.MestoDolaska)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model =>model.Rezervacije[0].Let.DatumLeta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model =>model.Rezervacije[0].Let.StatusLeta)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacije[0].BrojRezervisanihMesta)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Rezervacije[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacije[0].Korisnik)
+            </th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        @foreach (var item in Model.Rezervacije) 
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Let.MestoPolaska)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Let.MestoDolaska)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Let.DatumLeta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Let.StatusLeta)
+            </td>
+            
+             <td>
+                @Html.DisplayFor(modelItem => item.BrojRezervisanihMesta)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Korisnik.UserName)
+            </td>
+            <td>
+               @if(item.Status == "Čekanje") {
+                   
+            <form method="post" >
+              <div class="d-flex justify-content-space-between">
+              <input type= "submit" value="Odobri" asp-route-id="@item.Id" class="btn btn-success" />
+              </div>
+             </form>  
+               }  
+            </td>
+       </tr>
+        }
+    </tbody>
+
+</table>
+ 
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/communicationAgent.js"></script>

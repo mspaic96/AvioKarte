@@ -1,0 +1,110 @@
+@page
+@model Proba1.Pages.Letovi.IndexModel
+@using Proba1.Models
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Letovi</h1>
+@if(SignInManager.IsSignedIn(User) && User.IsInRole("Agent"))
+{
+<p>
+    <a asp-page="Create">Kreiraj Novi</a>
+</p>
+}
+@if(SignInManager.IsSignedIn(User) && User.IsInRole("Korisnik"))
+{
+<form>
+    <p>
+        Mesto Polaska: <input type="text" asp-for="SearchStringMestoPolaska" />
+        Mesto Dolaska: <input type="text" asp-for="SearchStringMestoDolaska" />
+        Bez Presjedanja <input class="mr-4" type="checkbox"  asp-for="IsChecked">
+        <input type="submit" value="Pretraga" />
+    </p>
+</form>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Let[0].MestoPolaska)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Let[0].MestoDolaska)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Let[0].DatumLeta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Let[0].BrojPresedanja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Let[0].BrojMestaNaLetu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Let[0].BrojSlobodnihMesta)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Let[0].StatusLeta)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Let) {
+  
+       <tr class= @(item.BrojSlobodnihMesta < 5 && SignInManager.IsSignedIn(User) && User.IsInRole("Agent") ? "upozorenje" : "normal")>
+            <td>
+                @Html.DisplayFor(modelItem => item.MestoPolaska)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MestoDolaska)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumLeta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojPresedanja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojMestaNaLetu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojSlobodnihMesta)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.StatusLeta)
+            </td>
+            <td>
+              <div class="d-flex justify-content-space-between">
+                <a class ="mr-2" asp-page="./Details" asp-route-id="@item.Id">Detalji</a> 
+              @if(SignInManager.IsSignedIn(User) && User.IsInRole("Administrator") && item.StatusLeta == "Aktivan")
+              {   
+                 <a asp-page="./Delete" asp-route-id="@item.Id"> Otkaži </a>
+              }
+               @if(SignInManager.IsSignedIn(User) && User.IsInRole("Korisnik") && item.StatusLeta == "Aktivan" && item.BrojSlobodnihMesta > 0)
+              {   
+                 <a asp-page="./Reserve" asp-route-id="@item.Id"> Rezerviši </a>
+              }
+
+              </div>
+            </td>
+        </tr>
+  
+}
+    </tbody>
+</table>
+<style>
+    .upozorenje
+    {
+        background-color: red;
+    }
+     .normal
+    {
+        background-color: white;
+    }
+</style>

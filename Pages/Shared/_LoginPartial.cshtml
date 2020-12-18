@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Proba1.Models
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{    <li class="nav-item">
+     <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+    </li>
+    @if(User.IsInRole("Korisnik"))
+    {
+    <li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-page="/Rezervacije/KorisnikRezervacije"> Moje rezervacije</a>
+    </li>
+    }
+     else if(User.IsInRole("Agent"))
+    {
+    <li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-page="/Rezervacije/AgentRezervacije">Rezervacije </a>
+    </li>
+    }
+     else if(User.IsInRole("Administrator"))
+    {
+    <li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-page="/Rezervacije/AdministratorRezervacije">Pregledaj rezervacije </a>
+    </li>
+    }
+    
+    <li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-page="/Letovi/Index">Letovi</a>
+    </li>
+    @if(SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+    {
+     <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Dodaj korisnika</a>
+    </li>
+    } 
+    <li class="nav-item">
+        <a  class="nav-link text-dark" asp-area="" asp-page="/Index" ><b>Zdravo @User.Identity.Name!</b></a>
+    </li>
+    <li class="nav-item">
+        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
+            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+    
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
+</ul>
